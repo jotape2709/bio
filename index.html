@@ -1,43 +1,879 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>João Pedro - BIO</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<script>
+/* ==========================================================================
+   LINKS — edite somente aqui.
+
+   Cada chave abaixo alimenta um botão (data-link="chave") na página.
+   - Use sempre o endereço completo, começando com https://
+   - Um link vazio ou inválido esconde o item correspondente (sem quebrar a página).
+   - SITE é a base das páginas internas do site jotape.exp.
+   ========================================================================== */
+const SITE = 'https://jotape-exp.vercel.app';
+
+const LINKS = Object.freeze({
+  whatsapp:    'https://chat.whatsapp.com/LxESgH3EsjYCQ4aeIZzrXB', // Grupo do WhatsApp (convite pode ser redefinido)
+  site:        SITE + '/',                                         // Site jotape.exp
+  livro:       SITE + '/livros',                                   // Página do livro
+  aula:        SITE + '/acervo/linguagem-matematica',              // Aula animada: "Antes da conta, leia os símbolos."
+  kit:         SITE + '/materiais/leitura-matematica',             // Kit de aula para professores
+  laboratorio: SITE + '/laboratorio',                              // Laboratório
+  uiclap:      'https://uiclap.bio/jotape.exp',                    // Perfil do autor na UICLAP
+  instagram:   'https://www.instagram.com/jotape.exp/',            // Instagram
+});
+</script>
+
+<title>Ler antes de calcular · João Pedro</title>
+<meta name="description" content="Ler antes de calcular, de João Pedro: a linguagem dos símbolos, da álgebra e da identidade matemática. Comunidade no WhatsApp, site, aulas e materiais.">
+<meta name="author" content="João Pedro">
+<meta name="theme-color" content="#1B1A21">
+<meta name="color-scheme" content="dark">
+
+<!-- Endereço público desta página (o mesmo do QR code impresso).
+     Se o domínio final na Vercel for outro, troque-o nas 4 linhas abaixo. -->
+<link rel="canonical" href="https://ler-antes-de-calcular.vercel.app/">
+<meta property="og:url" content="https://ler-antes-de-calcular.vercel.app/">
+<meta property="og:image" content="https://ler-antes-de-calcular.vercel.app/assets/img/og.jpg">
+<meta name="twitter:image" content="https://ler-antes-de-calcular.vercel.app/assets/img/og.jpg">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="jotape.exp">
+<meta property="og:title" content="Ler antes de calcular · João Pedro">
+<meta property="og:description" content="Ler antes de calcular. Entender antes de resolver. A linguagem dos símbolos, da álgebra e da identidade matemática.">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Capa de Ler antes de calcular: o quadrado de (a + b) dividido em a², dois retângulos ab e b², em violeta e lilás sobre fundo escuro.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ler antes de calcular · João Pedro">
+<meta name="twitter:description" content="Ler antes de calcular. Entender antes de resolver.">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/lmroman17-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/lmroman10-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/lmroman10-italic.woff2" as="font" type="font/woff2" crossorigin>
+
+<script>
+  /* Prepara a animação de entrada (não precisa editar).
+     Sem movimento reduzido, os elementos começam ocultos e o GSAP os revela.
+     Rede de segurança: se o script de animação não rodar, tudo aparece em 3,5 s. */
+  (function () {
+    var root = document.documentElement;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    root.classList.add('is-intro');
+    setTimeout(function () { root.classList.remove('is-intro'); }, 3500);
+  })();
+</script>
+<script src="assets/vendor/gsap-3.15.0.min.js" defer></script>
+
+<style>
+  @font-face { font-family: "LM Roman 10"; src: url("assets/fonts/lmroman10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LM Roman 10"; src: url("assets/fonts/lmroman10-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "LM Roman 17"; src: url("assets/fonts/lmroman17-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LM Roman Caps 10"; src: url("assets/fonts/lmromancaps10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+
+  :root {
+    --bg: #1B1A21;
+    --ink: #F4F3F8;
+    --ink-2: #E4E1EC;
+    --violet: #6A46DC;
+    --violet-deep: #5634C8;
+    --violet-2: #8B6CF0;
+    --lilac: #D9CFFD;
+    --lilac-ink: #BCAAF7;
+    --muted: #8F8A9F;
+    --rule: rgba(143, 138, 159, .32);
+
+    --serif: "LM Roman 10", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
+    --display: "LM Roman 17", var(--serif);
+    --caps: "LM Roman Caps 10", var(--serif);
+
+    --gutter: clamp(20px, 6vw, 40px);
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+
+  html {
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 1.0625rem/1.55 var(--serif);
+    font-kerning: normal;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+  i, em { font-style: italic; }
+
+  :focus-visible {
+    outline: 2px solid var(--lilac);
+    outline-offset: 4px;
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+
+  .caps {
+    font-family: var(--caps);
+    letter-spacing: .2em;
+  }
+
+  /* Luz de fundo discreta, atrás do motivo */
+  .glow {
+    position: fixed;
+    top: -28vmax;
+    left: -24vmax;
+    width: 80vmax;
+    height: 80vmax;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(106, 70, 220, .16), rgba(106, 70, 220, 0));
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---------- Layout ---------- */
+  .page {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 34rem);
+    min-height: 100vh;
+    min-height: 100svh;
+    margin-inline: auto;
+    padding:
+      max(clamp(28px, 5vh, 72px), env(safe-area-inset-top))
+      max(var(--gutter), env(safe-area-inset-right))
+      max(32px, env(safe-area-inset-bottom))
+      max(var(--gutter), env(safe-area-inset-left));
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* ---------- Identidade (a + b)² ---------- */
+  .identity { margin-bottom: 28px; }
+
+  .identity__figure {
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .motif {
+    flex: none;
+    width: 96px;
+    height: 96px;
+    overflow: visible;
+  }
+  .motif .lbl {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    fill: var(--muted);
+  }
+  .motif .piece,
+  .motif .lbl { transition: transform .6s var(--ease); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .identity__figure:hover .p-a2,  .identity__figure:hover .l-ta, .identity__figure:hover .l-la { transform: translate(-2.5px, -2.5px); }
+    .identity__figure:hover .p-abr, .identity__figure:hover .l-tb { transform: translate(2.5px, -2.5px); }
+    .identity__figure:hover .p-abb, .identity__figure:hover .l-lb { transform: translate(-2.5px, 2.5px); }
+    .identity__figure:hover .p-b2 { transform: translate(2.5px, 2.5px); }
+  }
+  .is-open .p-a2,  .is-open .l-ta, .is-open .l-la { transform: translate(-7px, -7px) !important; }
+  .is-open .p-abr, .is-open .l-tb { transform: translate(7px, -7px) !important; }
+  .is-open .p-abb, .is-open .l-lb { transform: translate(-7px, 7px) !important; }
+  .is-open .p-b2 { transform: translate(7px, 7px) !important; }
+
+  .identity__text { display: block; min-width: 0; }
+
+  .formula {
+    display: block;
+    white-space: nowrap;
+    font-size: clamp(.9375rem, 4.2vw, 1.0625rem);
+    color: var(--ink-2);
+  }
+  .formula .fx { display: inline-block; }
+  .formula sup {
+    font-size: .7em;
+    line-height: 0;
+    position: relative;
+    top: -.12em;
+    margin-left: .04em;
+  }
+  .formula .bin { margin: 0 .2222em; }
+  .formula i + .bin { margin-left: .28em; }
+  .formula .rel { margin: 0 .2778em; }
+  .formula .hlt {
+    border-radius: 2px;
+    padding: .02em .08em;
+    margin: -.02em -.08em;
+    background-color: rgba(106, 70, 220, 0);
+  }
+
+  .eyebrow {
+    display: block;
+    margin: 6px 0 0;
+    font-family: var(--caps);
+    font-size: .8125rem;
+    font-weight: 400;
+    letter-spacing: .22em;
+    color: var(--muted);
+  }
+
+  .reading { margin-top: 12px; font-size: .9375rem; line-height: 1.5; }
+  .reading__row {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows .55s var(--ease), opacity .35s ease;
+  }
+  .reading__row > * { min-height: 0; overflow: hidden; margin: 0; }
+  .reading__row--text { grid-template-rows: 0fr; opacity: 0; }
+  .reading__row--text > p { visibility: hidden; transition: visibility 0s .55s; }
+  .is-open .reading__row--hint { grid-template-rows: 0fr; opacity: 0; }
+  .is-open .reading__row--text { grid-template-rows: 1fr; opacity: 1; }
+  .is-open .reading__row--text > p { visibility: visible; transition-delay: 0s; }
+
+  .reading__hint { color: var(--muted); font-style: italic; }
+  .reading__text { color: var(--ink-2); }
+  .reading__text i { color: var(--lilac-ink); }
+  .reading__text .caps { font-size: .875em; letter-spacing: .16em; color: var(--muted); margin-right: .35em; }
+  .reading__text .w { display: inline-block; }
+
+  .on-pointer { display: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .on-touch { display: none; }
+    .on-pointer { display: inline; }
+  }
+
+  /* ---------- Título ---------- */
+  .title {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(3rem, 14.5vw, 4.5rem);
+    line-height: .98;
+    letter-spacing: -.012em;
+    color: var(--ink);
+  }
+  .title .line {
+    display: block;
+    overflow: hidden;
+    padding: .04em 0 .1em;
+    margin: -.04em 0 -.1em;
+  }
+  .title .line > span { display: block; }
+
+  .subtitle {
+    margin: 16px 0 0;
+    max-width: 36ch;
+    font-size: 1.0625rem;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+
+  .motto {
+    margin: 18px 0 0;
+    font-style: italic;
+    font-size: clamp(1.1875rem, 5.2vw, 1.375rem);
+    line-height: 1.35;
+    color: var(--lilac-ink);
+  }
+  .motto > span { display: block; width: fit-content; }
+
+  /* ---------- Botões principais ---------- */
+  .actions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 66px;
+    padding: 12px 18px 12px 16px;
+    border: 1px solid var(--violet-2);
+    color: var(--ink);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: border-color .35s ease;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--violet);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .5s var(--ease);
+  }
+  .btn:hover::before,
+  .btn:focus-visible::before { transform: scaleX(1); }
+  .btn:active { transform: scale(.985); }
+
+  .btn--primary { background: var(--violet); border-color: var(--violet); }
+  .btn--primary::before { background: var(--violet-deep); }
+
+  .btn__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+  }
+  .btn__icon svg { width: 24px; height: 24px; }
+  .btn__mark {
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1;
+    transform: translateX(-1px);
+  }
+  .btn__mark i + i { font-size: .62em; position: relative; top: -.62em; margin-left: .04em; }
+
+  .btn__body { flex: 1; min-width: 0; display: grid; gap: 1px; }
+  .btn__label { font-size: 1.125rem; line-height: 1.25; }
+  .btn__note {
+    font-style: italic;
+    font-size: .875rem;
+    line-height: 1.3;
+    color: var(--lilac-ink);
+    transition: color .35s ease;
+  }
+  .btn--primary .btn__note,
+  .btn:hover .btn__note,
+  .btn:focus-visible .btn__note { color: var(--ink-2); }
+
+  .arrow {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    transition: transform .45s var(--ease);
+  }
+  .btn:hover .arrow,
+  .btn:focus-visible .arrow { transform: translate(2px, -2px); }
+
+  /* ---------- Sumário ---------- */
+  .toc-wrap { margin-top: 44px; }
+  .toc-head { margin: 0; }
+  .toc-head .eyebrow { margin: 0; }
+  .rule {
+    height: 1px;
+    margin-top: 10px;
+    background: var(--rule);
+    transform-origin: left center;
+  }
+
+  .toc {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+  }
+
+  .toc__link {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.4em 1fr;
+    column-gap: 12px;
+    padding: 12px 0;
+    color: var(--ink);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .toc__num {
+    color: var(--lilac-ink);
+    font-variant-numeric: lining-nums tabular-nums;
+    transition: color .3s ease;
+  }
+  .toc__line { display: flex; align-items: baseline; align-items: last baseline; gap: 8px; }
+  .toc__title { transition: color .3s ease; }
+  .toc__leader {
+    flex: 1;
+    min-width: 16px;
+    height: 2px;
+    background-image: radial-gradient(circle, var(--muted) .85px, transparent 1.05px);
+    background-size: 5px 2px;
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    opacity: .7;
+    transform-origin: left center;
+    transition: opacity .3s ease;
+  }
+  .toc__arrow {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    color: var(--muted);
+    transition: transform .45s var(--ease), color .3s ease;
+  }
+  .toc__note {
+    display: block;
+    margin-top: 1px;
+    font-style: italic;
+    font-size: .875rem;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .toc__link:hover .toc__title,
+  .toc__link:focus-visible .toc__title { color: var(--lilac); }
+  .toc__link:hover .toc__num,
+  .toc__link:focus-visible .toc__num { color: var(--lilac); }
+  .toc__link:hover .toc__leader,
+  .toc__link:focus-visible .toc__leader { opacity: 1; }
+  .toc__link:hover .toc__arrow,
+  .toc__link:focus-visible .toc__arrow { color: var(--lilac); transform: translate(2px, -2px); }
+  .toc__link:active .toc__title { color: var(--lilac); }
+
+  /* ---------- Rodapé ---------- */
+  .colophon {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .colophon p { margin: 0; font-size: .9375rem; color: var(--ink-2); }
+  .colophon .caps { letter-spacing: .26em; }
+  .colophon .sep { color: var(--muted); margin: 0 .45em; }
+  .colophon .handle { color: var(--lilac-ink); }
+  .jx {
+    font-style: italic;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .jx i + i { font-size: .6em; position: relative; top: -.66em; margin-left: .03em; }
+
+  .noscript { margin: 0; color: var(--muted); font-style: italic; }
+
+  /* ---------- Desktop: página dupla, como um livro aberto ---------- */
+  @media (min-width: 960px) {
+    .page {
+      width: min(100%, 72rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      grid-template-rows: 1fr auto;
+      column-gap: clamp(56px, 8vw, 128px);
+      row-gap: 64px;
+      align-items: center;
+      padding-top: max(72px, 9vh);
+    }
+    .hero { grid-column: 1; }
+    .links { grid-column: 2; }
+    .colophon { grid-column: 1 / -1; align-self: end; }
+    .motif { width: 128px; height: 128px; }
+    .title { font-size: clamp(4.5rem, 6.6vw, 6.25rem); }
+    .subtitle { font-size: 1.1875rem; }
+    .glow { top: -30vmax; left: -18vmax; }
+  }
+
+  /* ---------- Estado inicial da animação (só com JS e sem movimento reduzido) ---------- */
+  .is-intro [data-intro] { visibility: hidden; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+    }
+  }
+</style>
 </head>
+
 <body>
-  <main>
-  <header>
-    <img src="https://avatars.githubusercontent.com/u/125517361?s=400&u=c73f8e5cc635768caa8d3ec19d51cad94a5990aa&v=4">
-    <h1>@jp.smb</h1>  
+<div class="glow" aria-hidden="true" data-intro></div>
+
+<div class="page">
+  <header class="hero">
+    <div class="identity">
+      <button class="identity__figure" type="button" aria-expanded="false" aria-controls="leitura">
+        <svg class="motif" viewBox="0 0 190 190" aria-hidden="true" focusable="false" data-intro>
+          <g class="lbl l-ta"><text x="70" y="13" text-anchor="middle">a</text></g>
+          <g class="lbl l-tb"><text x="154" y="13" text-anchor="middle">b</text></g>
+          <g class="lbl l-la"><text x="9" y="75" text-anchor="middle">a</text></g>
+          <g class="lbl l-lb"><text x="9" y="159" text-anchor="middle">b</text></g>
+
+          <g class="piece p-a2" data-piece="a2">
+            <path class="edge" d="M21 21H119V119H21Z" pathLength="1" stroke-dasharray="1" fill="none" stroke="#8B6CF0" stroke-width="2"/>
+            <rect class="fill" x="20" y="20" width="100" height="100" fill="#6A46DC"/>
+            <rect class="hl" x="20" y="20" width="100" height="100" fill="#D9CFFD" opacity="0"/>
+          </g>
+          <g class="piece p-abr" data-piece="ab">
+            <rect class="hl" x="123" y="20" width="62" height="100" fill="#8B6CF0" opacity="0"/>
+            <path class="edge" d="M124 21H184V119H124Z" pathLength="1" stroke-dasharray="1" fill="none" stroke="#8B6CF0" stroke-width="2"/>
+          </g>
+          <g class="piece p-abb" data-piece="ab">
+            <rect class="hl" x="20" y="123" width="100" height="62" fill="#8B6CF0" opacity="0"/>
+            <path class="edge" d="M21 124H119V184H21Z" pathLength="1" stroke-dasharray="1" fill="none" stroke="#8B6CF0" stroke-width="2"/>
+          </g>
+          <g class="piece p-b2" data-piece="b2">
+            <path class="edge" d="M124 124H184V184H124Z" pathLength="1" stroke-dasharray="1" fill="none" stroke="#8B6CF0" stroke-width="2"/>
+            <rect class="fill" x="123" y="123" width="62" height="62" fill="#D9CFFD"/>
+            <rect class="hl" x="123" y="123" width="62" height="62" fill="#F4F3F8" opacity="0"/>
+          </g>
+        </svg>
+
+        <span class="identity__text">
+          <span class="formula" aria-hidden="true"><span class="fx" data-intro data-step="sq"><span class="hlt" data-term="sq">(<i>a</i><span class="bin">+</span><i>b</i>)<sup>2</sup></span></span><span class="fx" data-intro data-step="a2"><span class="rel">=</span><span class="hlt" data-term="a2"><i>a</i><sup>2</sup></span></span><span class="fx" data-intro data-step="ab"><span class="bin">+</span><span class="hlt" data-term="ab">2<i>a</i><i>b</i></span></span><span class="fx" data-intro data-step="b2"><span class="bin">+</span><span class="hlt" data-term="b2"><i>b</i><sup>2</sup></span></span></span>
+          <span class="eyebrow" data-intro>identidade algébrica</span>
+          <span class="sr-only">: ler em voz alta</span>
+        </span>
+      </button>
+
+      <div class="reading" id="leitura">
+        <div class="reading__row reading__row--hint" aria-hidden="true" data-intro>
+          <p class="reading__hint"><span class="on-touch">Toque</span><span class="on-pointer">Clique</span> na figura para lê-la.</p>
+        </div>
+        <div class="reading__row reading__row--text">
+          <p class="reading__text"><span class="caps">lê-se</span> <span class="seg" data-hl="sq"><i>a</i> mais <i>b</i>, tudo ao quadrado,</span> <span class="seg">é igual a</span> <span class="seg" data-hl="a2"><i>a</i> ao quadrado,</span> <span class="seg" data-hl="ab">mais dois <i>a</i> <i>b</i>,</span> <span class="seg" data-hl="b2">mais <i>b</i> ao quadrado.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="title" aria-label="Ler antes de calcular">
+      <span class="line" aria-hidden="true"><span data-intro>Ler antes</span></span>
+      <span class="line" aria-hidden="true"><span data-intro>de calcular</span></span>
+    </h1>
+    <p class="subtitle" data-intro>A linguagem dos símbolos, da álgebra e da identidade matemática</p>
+    <p class="motto"><span data-intro>Ler antes de calcular.</span><span data-intro>Entender antes de resolver.</span></p>
   </header>
-    <ul>
-      <li>
-        <a href="#">
-        <img src="/assets/hammer.png" width="20">
-          Portifólio (Em construção)
-      </a>
-      </li>
-      <li>
-        <a href="https://twitter.com/jotabigchill" target="_blank">
-        <img src="/assets/twitter.png" width="20">
-        Twitter
-      </a>
-      </li>
-      <li>
-        <a href="https://github.com/jotape2709" target="_blank">
-        <img src="/assets/github.png" width="20">
-        Github
-      </a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/joao2709/" target="_blank">
-        <img src="/assets/linkedin.png" width="20">
-          linkedin
-      </a>
-      </li>
-    </ul>
-</main>
+
+  <main class="links">
+    <noscript><p class="noscript">Ative o JavaScript para abrir os links desta página.</p></noscript>
+
+    <nav aria-label="Links principais">
+      <ul class="actions">
+        <li data-intro>
+          <a class="btn btn--primary" data-link="whatsapp" target="_blank" rel="noopener">
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.45L3.5 20.5l1.55-4.3A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
+            </span>
+            <span class="btn__body">
+              <span class="btn__label">Grupo do WhatsApp</span>
+              <span class="btn__note">novidades do livro, aulas e bastidores</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="btn" data-link="site" target="_blank" rel="noopener">
+            <span class="btn__icon" aria-hidden="true"><span class="btn__mark"><i>j</i><i>x</i></span></span>
+            <span class="btn__body">
+              <span class="btn__label">Site</span>
+              <span class="btn__note">matemática e física em movimento</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="toc-wrap" aria-labelledby="sumario">
+      <div class="toc-head">
+        <h2 class="eyebrow" id="sumario" data-intro>sumário</h2>
+        <div class="rule" aria-hidden="true" data-intro></div>
+      </div>
+      <ol class="toc">
+        <li data-intro>
+          <a class="toc__link" data-link="livro" target="_blank" rel="noopener">
+            <span class="toc__num" aria-hidden="true">1</span>
+            <span>
+              <span class="toc__line"><span class="toc__title">O livro</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
+              <span class="toc__note">as quatro partes, os capítulos e o teaser</span>
+            </span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="toc__link" data-link="aula" target="_blank" rel="noopener">
+            <span class="toc__num" aria-hidden="true">2</span>
+            <span>
+              <span class="toc__line"><span class="toc__title">Antes da conta, leia os símbolos</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
+              <span class="toc__note">aula animada do acervo</span>
+            </span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="toc__link" data-link="kit" target="_blank" rel="noopener">
+            <span class="toc__num" aria-hidden="true">3</span>
+            <span>
+              <span class="toc__line"><span class="toc__title">Kit de aula: leitura matemática</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
+              <span class="toc__note">para professores · roteiro de 50 minutos</span>
+            </span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="toc__link" data-link="laboratorio" target="_blank" rel="noopener">
+            <span class="toc__num" aria-hidden="true">4</span>
+            <span>
+              <span class="toc__line"><span class="toc__title">Laboratório</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
+              <span class="toc__note">mude uma variável e veja a ideia mudar</span>
+            </span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="toc__link" data-link="uiclap" target="_blank" rel="noopener">
+            <span class="toc__num" aria-hidden="true">5</span>
+            <span>
+              <span class="toc__line"><span class="toc__title">João Pedro na UICLAP</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
+              <span class="toc__note">perfil do autor e edições</span>
+            </span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="toc__link" data-link="instagram" target="_blank" rel="noopener">
+            <span class="toc__num" aria-hidden="true">6</span>
+            <span>
+              <span class="toc__line"><span class="toc__title">Instagram</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
+              <span class="toc__note">@jotape.exp</span>
+            </span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="colophon" data-intro>
+    <p><span class="caps">joão pedro</span><span class="sep" aria-hidden="true">·</span><i class="handle">jotape.exp</i></p>
+    <span class="jx" aria-hidden="true"><i>j</i><i>x</i></span>
+  </footer>
+</div>
+
+<script>
+  /* Links + leitura da figura. Funciona mesmo sem o GSAP. */
+  (function () {
+    'use strict';
+
+    var isSafeUrl = function (url) {
+      return typeof url === 'string' && /^https:\/\/[^\s"'<>]+$/i.test(url);
+    };
+
+    document.querySelectorAll('[data-link]').forEach(function (anchor) {
+      var key = anchor.getAttribute('data-link');
+      var url = typeof LINKS === 'object' && LINKS ? LINKS[key] : undefined;
+      if (isSafeUrl(url)) {
+        anchor.href = url;
+        return;
+      }
+      console.warn('[bio] Link "' + key + '" ausente ou inválido em LINKS; item ocultado.');
+      (anchor.closest('li') || anchor).hidden = true;
+    });
+
+    var box = document.querySelector('.identity');
+    var button = box && box.querySelector('.identity__figure');
+    if (!button) return;
+
+    // Ativa :active no iOS (feedback de toque nos botões).
+    document.addEventListener('touchstart', function () {}, { passive: true });
+
+    button.addEventListener('click', function () {
+      var open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open));
+      box.classList.toggle('is-open', open);
+      box.dispatchEvent(new CustomEvent('identity:toggle', { detail: { open: open } }));
+    });
+  })();
+</script>
+
+<script type="module">
+  /* Motion design com GSAP: entrada orquestrada + leitura sincronizada da identidade. */
+  const gsap = window.gsap;
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+  if (!gsap) {
+    root.classList.remove('is-intro');
+  } else if (!reduceMotion) {
+    setup();
+  }
+
+  function setup() {
+    const motif = $('.motif');
+    const box = $('.identity');
+    const pieces = (key) => $$(`[data-piece="${key}"]`, motif);
+    const piecesOf = (key) => (key === 'sq' ? $$('.piece', motif) : pieces(key));
+    const step = (key) => $(`[data-step="${key}"]`);
+    const term = (key) => $(`[data-term="${key}"]`);
+    const MARK_ON = 'rgba(106, 70, 220, .62)';
+    const MARK_OFF = 'rgba(106, 70, 220, 0)';
+
+    /* ----- Entrada ----- */
+    const fontsReady = document.fonts
+      ? Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 900))])
+      : Promise.resolve();
+
+    fontsReady.then(() => {
+      if (!root.classList.contains('is-intro')) return; // rede de segurança já revelou tudo
+      intro().eventCallback('onComplete', () => {
+        root.classList.remove('is-intro');
+        const settled = $$('[data-intro]').filter((el) => !(el instanceof SVGElement));
+        gsap.set([...settled, ...$$('.toc__leader')], { clearProps: 'all' });
+      });
+    });
+
+    function intro() {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const edges = $$('.edge', motif);
+      const labels = $$('.lbl text', motif);
+
+      tl.set('[data-intro]', { visibility: 'visible' }, 0)
+        .fromTo('.glow', { opacity: 0, scale: .85 }, { opacity: 1, scale: 1, duration: 2.2, ease: 'sine.out' }, 0)
+
+        // A figura se constrói como uma prova sem palavras: contorno, a², 2ab, b².
+        .fromTo(edges, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .9, stagger: .07, ease: 'power2.inOut' }, .05)
+        .fromTo(labels, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: .5, stagger: .05 }, .3)
+        .fromTo(step('sq'), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .5 }, .2)
+
+        .fromTo($('.p-a2 .fill', motif), { scale: 0, transformOrigin: '0% 0%' }, { scale: 1, duration: .8, ease: 'expo.out' }, .5)
+        .fromTo(step('a2'), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .5 }, .55)
+
+        .to($$('[data-piece="ab"] .hl', motif), { opacity: .55, duration: .18, ease: 'power1.out' }, .78)
+        .to($$('[data-piece="ab"] .hl', motif), { opacity: 0, duration: .9, ease: 'power2.out' }, '>')
+        .fromTo(step('ab'), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .5 }, .78)
+
+        .fromTo($('.p-b2 .fill', motif), { scale: 0, transformOrigin: '100% 100%' }, { scale: 1, duration: .7, ease: 'expo.out' }, 1)
+        .fromTo(step('b2'), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .5 }, 1)
+
+        .fromTo('.identity .eyebrow', { opacity: 0 }, { opacity: 1, duration: .6 }, 1.15)
+        .fromTo('.reading__row--hint', { opacity: 0 }, { opacity: 1, duration: .6 }, 1.25)
+
+        // Texto: título por linhas mascaradas, depois subtítulo e o lema "escrito" à mão.
+        .fromTo('.title .line > span', { yPercent: 108 }, { yPercent: 0, duration: 1.1, stagger: .1, ease: 'expo.out' }, .15)
+        .fromTo('.subtitle', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .8 }, .5)
+        .fromTo('.motto > span',
+          { clipPath: 'inset(0% 100% 0% 0%)', opacity: .001 },
+          { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: .85, stagger: .32, ease: 'power2.inOut' }, .7)
+
+        // Links: botões, régua do sumário e entradas com reticências.
+        .fromTo('.actions > li', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8, stagger: .09 }, .6)
+        .fromTo('#sumario', { opacity: 0 }, { opacity: 1, duration: .6 }, .9)
+        .fromTo('.rule', { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'power2.inOut' }, .9)
+        .fromTo('.toc > li', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, stagger: .06 }, 1)
+        .fromTo('.toc__leader', { scaleX: 0 }, { scaleX: 1, duration: .8, stagger: .06, ease: 'power2.out' }, 1.1)
+        .fromTo('.colophon', { opacity: 0 }, { opacity: 1, duration: .8 }, 1.35);
+
+      return tl;
+    }
+
+    /* ----- Leitura em voz alta: cada trecho acende a parte correspondente ----- */
+    const reading = $('.reading__text');
+    const segments = $$('.seg', reading).map((seg) => ({ key: seg.dataset.hl, words: splitWords(seg) }));
+    const lead = $('.caps', reading);
+    let readingTl = null;
+
+    function splitWords(el) {
+      const words = [];
+      Array.from(el.childNodes).forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          node.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(part); return; }
+            const span = document.createElement('span');
+            span.className = 'w';
+            span.textContent = part;
+            frag.append(span);
+            words.push(span);
+          });
+          node.replaceWith(frag);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          node.classList.add('w');
+          words.push(node);
+        }
+      });
+      return words;
+    }
+
+    function highlight(key) {
+      const tl = gsap.timeline();
+      const overlays = piecesOf(key).map((piece) => $('.hl', piece));
+      tl.fromTo(overlays, { opacity: 0 }, { opacity: key === 'ab' ? .5 : .4, duration: .22, ease: 'power1.out' })
+        .to(overlays, { opacity: 0, duration: .9, ease: 'power2.inOut' }, '>.1')
+        .fromTo(term(key), { backgroundColor: MARK_OFF }, { backgroundColor: MARK_ON, duration: .22 }, 0)
+        .to(term(key), { backgroundColor: MARK_OFF, duration: .9, ease: 'power2.inOut' }, '>.25');
+      if (key === 'sq') {
+        tl.fromTo($$('.edge', motif), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .7, ease: 'power2.inOut', stagger: .05 }, 0);
+      }
+      return tl;
+    }
+
+    function resetReading() {
+      if (readingTl) readingTl.kill();
+      readingTl = null;
+      gsap.set($$('.hl', motif), { opacity: 0 });
+      gsap.set($$('.edge', motif), { strokeDashoffset: 0 });
+      gsap.set($$('[data-term]'), { backgroundColor: MARK_OFF });
+      gsap.set([lead, ...segments.flatMap((s) => s.words)], { clearProps: 'opacity,transform' });
+    }
+
+    box.addEventListener('identity:toggle', (event) => {
+      resetReading();
+      if (!event.detail.open) return;
+
+      const STAGGER = .075;
+      let cursor = .3;
+      readingTl = gsap.timeline({ delay: .15 });
+      readingTl.fromTo(lead, { opacity: 0 }, { opacity: 1, duration: .3 }, 0);
+      segments.forEach(({ key, words }) => {
+        readingTl.fromTo(words, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: .35, stagger: STAGGER, ease: 'power2.out' }, cursor);
+        if (key) readingTl.add(highlight(key), cursor);
+        cursor += words.length * STAGGER + .22; // pausa curta, como uma vírgula lida em voz alta
+      });
+    });
+  }
+</script>
 </body>
 </html>
