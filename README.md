@@ -19,23 +19,21 @@ assets/img/                favicon.svg, apple-touch-icon.png, og.jpg (prévia do
 
 ## Editar os links
 
-Abra `index.html`. O bloco `LINKS` é a primeira coisa do arquivo:
+Cada botão em `index.html` tem o endereço direto no `href` (sem depender de JavaScript,
+para funcionar no navegador interno do Instagram). Para trocar um link, edite o `href`
+do botão; o atributo `data-link` só identifica qual botão é qual:
 
-```js
-const SITE = 'https://jotape-exp.vercel.app';
+| data-link   | Destino                                   |
+|-------------|-------------------------------------------|
+| ebook       | Checkout do e-book na Hotmart             |
+| fisico      | Livro físico na loja UICLAP               |
+| whatsapp    | Grupo do WhatsApp (onde fica o cupom)     |
+| site        | Site jotape.exp                           |
+| livro, aula, kit, laboratorio | Páginas do site         |
+| uiclap      | Perfil do autor na UICLAP                 |
+| instagram   | Instagram                                 |
 
-const LINKS = Object.freeze({
-  whatsapp:    'https://chat.whatsapp.com/…',  // Grupo do WhatsApp
-  site:        SITE + '/',
-  livro:       SITE + '/livros',
-  // …
-});
-```
-
-- **Convite do WhatsApp redefinido?** Troque só a linha `whatsapp`, faça commit e push. A Vercel publica em segundos.
-- **Domínio do site mudou?** Troque só `SITE`; as páginas internas acompanham.
-- Use sempre `https://`. Um link vazio ou inválido esconde o item, sem quebrar a página.
-- Os textos dos botões ficam no HTML, logo abaixo, marcados com `data-link="chave"`.
+Quando o cupom do livro físico acabar, troque o texto do botão `whatsapp`.
 
 ## Publicar na Vercel
 
