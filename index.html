@@ -4,28 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<script>
-/* ==========================================================================
-   LINKS — edite somente aqui.
-
-   Cada chave abaixo alimenta um botão (data-link="chave") na página.
-   - Use sempre o endereço completo, começando com https://
-   - Um link vazio ou inválido esconde o item correspondente (sem quebrar a página).
-   - SITE é a base das páginas internas do site jotape.exp.
-   ========================================================================== */
-const SITE = 'https://jotape-exp.vercel.app';
-
-const LINKS = Object.freeze({
-  whatsapp:    'https://chat.whatsapp.com/LxESgH3EsjYCQ4aeIZzrXB', // Grupo do WhatsApp (convite pode ser redefinido)
-  site:        SITE + '/',                                         // Site jotape.exp
-  livro:       SITE + '/livros',                                   // Página do livro
-  aula:        SITE + '/acervo/linguagem-matematica',              // Aula animada: "Antes da conta, leia os símbolos."
-  kit:         SITE + '/materiais/leitura-matematica',             // Kit de aula para professores
-  laboratorio: SITE + '/laboratorio',                              // Laboratório
-  uiclap:      'https://uiclap.bio/jotape.exp',                    // Perfil do autor na UICLAP
-  instagram:   'https://www.instagram.com/jotape.exp/',            // Instagram
-});
-</script>
+<!-- ==========================================================================
+     LINKS: cada botão tem o endereço direto no próprio href (funciona sem JavaScript,
+     inclusive no navegador interno do Instagram). Para trocar um link, edite o href
+     do botão correspondente; o atributo data-link só identifica o botão.
+     ========================================================================== -->
 
 <title>Ler antes de calcular · João Pedro</title>
 <meta name="description" content="Ler antes de calcular, de João Pedro: a linguagem dos símbolos, da álgebra e da identidade matemática. Comunidade no WhatsApp, site, aulas e materiais.">
@@ -34,11 +17,11 @@ const LINKS = Object.freeze({
 <meta name="color-scheme" content="dark">
 
 <!-- Endereço público desta página (o mesmo do QR code impresso).
-     Se o domínio final na Vercel for outro, troque-o nas 4 linhas abaixo. -->
-<link rel="canonical" href="https://ler-antes-de-calcular.vercel.app/">
-<meta property="og:url" content="https://ler-antes-de-calcular.vercel.app/">
-<meta property="og:image" content="https://ler-antes-de-calcular.vercel.app/assets/img/og.jpg">
-<meta name="twitter:image" content="https://ler-antes-de-calcular.vercel.app/assets/img/og.jpg">
+     Se o domínio mudar, troque-o nas 4 linhas abaixo. -->
+<link rel="canonical" href="https://ler-antes.vercel.app/">
+<meta property="og:url" content="https://ler-antes.vercel.app/">
+<meta property="og:image" content="https://ler-antes.vercel.app/assets/img/og.jpg">
+<meta name="twitter:image" content="https://ler-antes.vercel.app/assets/img/og.jpg">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
@@ -89,6 +72,7 @@ const LINKS = Object.freeze({
     --lilac: #D9CFFD;
     --lilac-ink: #BCAAF7;
     --muted: #8F8A9F;
+    --gold: #F2B84B;
     --rule: rgba(143, 138, 159, .32);
 
     --serif: "LM Roman 10", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
@@ -354,6 +338,29 @@ const LINKS = Object.freeze({
   .btn:active { transform: scale(.985); }
 
   .btn--primary { background: var(--violet); border-color: var(--violet); }
+  .btn--coupon { border-color: var(--gold); }
+  .btn--coupon .btn__icon,
+  .btn--coupon .btn__note { color: var(--gold); }
+  .btn--coupon:hover .btn__note,
+  .btn--coupon:focus-visible .btn__note { color: var(--ink-2); }
+
+  .launch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+    font-family: var(--caps);
+    font-size: .8125rem;
+    letter-spacing: .22em;
+    color: var(--gold);
+  }
+  .launch__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px rgba(242, 184, 75, .18);
+  }
   .btn--primary::before { background: var(--violet-deep); }
 
   .btn__icon {
@@ -582,25 +589,47 @@ const LINKS = Object.freeze({
   </header>
 
   <main class="links">
-    <noscript><p class="noscript">Ative o JavaScript para abrir os links desta página.</p></noscript>
+    <p class="launch" data-intro><span class="launch__dot" aria-hidden="true"></span>já disponível</p>
 
     <nav aria-label="Links principais">
       <ul class="actions">
         <li data-intro>
-          <a class="btn btn--primary" data-link="whatsapp" target="_blank" rel="noopener">
-            <span class="btn__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.45L3.5 20.5l1.55-4.3A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
-            </span>
+          <a class="btn btn--primary" href="https://pay.hotmart.com/K108111994Y" data-link="ebook" target="_blank" rel="noopener">
+            <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M9 6.5h6M9 10h6M9 13.5h4"/></svg></span>
             <span class="btn__body">
-              <span class="btn__label">Grupo do WhatsApp</span>
-              <span class="btn__note">novidades do livro, aulas e bastidores</span>
+              <span class="btn__label">Comprar o e-book</span>
+              <span class="btn__note">PDF pela Hotmart</span>
             </span>
             <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg>
             <span class="sr-only">(abre em nova aba)</span>
           </a>
         </li>
         <li data-intro>
-          <a class="btn" data-link="site" target="_blank" rel="noopener">
+          <a class="btn" href="https://loja.uiclap.com/titulo/ua210016" data-link="fisico" target="_blank" rel="noopener">
+            <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span>
+            <span class="btn__body">
+              <span class="btn__label">Comprar o livro físico</span>
+              <span class="btn__note">na UICLAP · R$ 60</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="btn btn--coupon" href="https://chat.whatsapp.com/LxESgH3EsjYCQ4aeIZzrXB" data-link="whatsapp" target="_blank" rel="noopener">
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.45L3.5 20.5l1.55-4.3A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
+            </span>
+            <span class="btn__body">
+              <span class="btn__label">Cupom no grupo do WhatsApp</span>
+              <span class="btn__note">livro físico de R$ 60 por R$ 40 · por tempo limitado</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </li>
+        <li data-intro>
+          <a class="btn" href="https://jotape-exp.vercel.app/" data-link="site" target="_blank" rel="noopener">
             <span class="btn__icon" aria-hidden="true"><span class="btn__mark"><i>j</i><i>x</i></span></span>
             <span class="btn__body">
               <span class="btn__label">Site</span>
@@ -620,17 +649,17 @@ const LINKS = Object.freeze({
       </div>
       <ol class="toc">
         <li data-intro>
-          <a class="toc__link" data-link="livro" target="_blank" rel="noopener">
+          <a class="toc__link" href="https://jotape-exp.vercel.app/livros" data-link="livro" target="_blank" rel="noopener">
             <span class="toc__num" aria-hidden="true">1</span>
             <span>
               <span class="toc__line"><span class="toc__title">O livro</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
-              <span class="toc__note">as quatro partes, os capítulos e o teaser</span>
+              <span class="toc__note">as quatro partes, os capítulos e a amostra</span>
             </span>
             <span class="sr-only">(abre em nova aba)</span>
           </a>
         </li>
         <li data-intro>
-          <a class="toc__link" data-link="aula" target="_blank" rel="noopener">
+          <a class="toc__link" href="https://jotape-exp.vercel.app/acervo/linguagem-matematica" data-link="aula" target="_blank" rel="noopener">
             <span class="toc__num" aria-hidden="true">2</span>
             <span>
               <span class="toc__line"><span class="toc__title">Antes da conta, leia os símbolos</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
@@ -640,7 +669,7 @@ const LINKS = Object.freeze({
           </a>
         </li>
         <li data-intro>
-          <a class="toc__link" data-link="kit" target="_blank" rel="noopener">
+          <a class="toc__link" href="https://jotape-exp.vercel.app/materiais/leitura-matematica" data-link="kit" target="_blank" rel="noopener">
             <span class="toc__num" aria-hidden="true">3</span>
             <span>
               <span class="toc__line"><span class="toc__title">Kit de aula: leitura matemática</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
@@ -650,7 +679,7 @@ const LINKS = Object.freeze({
           </a>
         </li>
         <li data-intro>
-          <a class="toc__link" data-link="laboratorio" target="_blank" rel="noopener">
+          <a class="toc__link" href="https://jotape-exp.vercel.app/laboratorio" data-link="laboratorio" target="_blank" rel="noopener">
             <span class="toc__num" aria-hidden="true">4</span>
             <span>
               <span class="toc__line"><span class="toc__title">Laboratório</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
@@ -660,7 +689,7 @@ const LINKS = Object.freeze({
           </a>
         </li>
         <li data-intro>
-          <a class="toc__link" data-link="uiclap" target="_blank" rel="noopener">
+          <a class="toc__link" href="https://uiclap.bio/jotape.exp" data-link="uiclap" target="_blank" rel="noopener">
             <span class="toc__num" aria-hidden="true">5</span>
             <span>
               <span class="toc__line"><span class="toc__title">João Pedro na UICLAP</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
@@ -670,7 +699,7 @@ const LINKS = Object.freeze({
           </a>
         </li>
         <li data-intro>
-          <a class="toc__link" data-link="instagram" target="_blank" rel="noopener">
+          <a class="toc__link" href="https://www.instagram.com/jotape.exp/" data-link="instagram" target="_blank" rel="noopener">
             <span class="toc__num" aria-hidden="true">6</span>
             <span>
               <span class="toc__line"><span class="toc__title">Instagram</span><span class="toc__leader" aria-hidden="true"></span><svg class="toc__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></span>
@@ -690,24 +719,9 @@ const LINKS = Object.freeze({
 </div>
 
 <script>
-  /* Links + leitura da figura. Funciona mesmo sem o GSAP. */
+  /* Leitura da figura. Funciona mesmo sem o GSAP. */
   (function () {
     'use strict';
-
-    var isSafeUrl = function (url) {
-      return typeof url === 'string' && /^https:\/\/[^\s"'<>]+$/i.test(url);
-    };
-
-    document.querySelectorAll('[data-link]').forEach(function (anchor) {
-      var key = anchor.getAttribute('data-link');
-      var url = typeof LINKS === 'object' && LINKS ? LINKS[key] : undefined;
-      if (isSafeUrl(url)) {
-        anchor.href = url;
-        return;
-      }
-      console.warn('[bio] Link "' + key + '" ausente ou inválido em LINKS; item ocultado.');
-      (anchor.closest('li') || anchor).hidden = true;
-    });
 
     var box = document.querySelector('.identity');
     var button = box && box.querySelector('.identity__figure');
@@ -798,6 +812,7 @@ const LINKS = Object.freeze({
           { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: .85, stagger: .32, ease: 'power2.inOut' }, .7)
 
         // Links: botões, régua do sumário e entradas com reticências.
+        .fromTo('.launch', { opacity: 0 }, { opacity: 1, duration: .6 }, .55)
         .fromTo('.actions > li', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8, stagger: .09 }, .6)
         .fromTo('#sumario', { opacity: 0 }, { opacity: 1, duration: .6 }, .9)
         .fromTo('.rule', { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'power2.inOut' }, .9)
