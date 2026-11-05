@@ -31,7 +31,9 @@ do botão; o atributo `data-link` só identifica qual botão é qual:
 | site        | Site jotape.exp                           |
 | livro, aula, kit, laboratorio | Páginas do site         |
 | uiclap      | Perfil do autor na UICLAP                 |
-| instagram   | Instagram                                 |
+| tiktok      | TikTok (@jotape.qed), seção "nas redes"   |
+| youtube     | YouTube Shorts (@jotape-exp)              |
+| instagram   | Instagram (@jotape.exp)                   |
 
 Quando o cupom do livro físico acabar, troque o texto do botão `whatsapp`.
 
